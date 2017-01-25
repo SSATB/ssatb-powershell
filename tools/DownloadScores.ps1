@@ -77,7 +77,7 @@ if ($LastRunDate -eq '1/1/1970 12:00:00 AM'){
 # students. 
 
 $urlAllFolios = "$apiRoot/scores/StudentScoresAll/$schoolCode"
-$urlAllFolios += "?LastUpdateDateRangeStart=" + $LastRunDate.ToString("yyyy-MM-dd hh:mm:ss")
+$urlAllFolios += "?LastUpdateDateRangeStart=" + $LastRunDate.ToString("yyyy-MM-dd HH:mm:ss")
 Write-Debug  "Request All Scores Since : $LastRunDate" 
 $allFoliosResponse=Invoke-RestMethod -Method Get -Uri $urlAllFolios -Headers $accessTokenHeader
 
