@@ -16,13 +16,25 @@
 
 Param(
 [Parameter ()]
-[DateTime] $LastRunDate = '1/1/1970 12:00:00 AM',
+ [DateTime] $LastRunDate = '1/1/1970 12:00:00 AM',
 [Parameter()]
- [String]$ExportFolder = ""
+ [String]$ExportFolder = "",
+[Parameter()]
+ [String]$ClientId = "",
+[Parameter()]
+ [String]$ClientSecret = "",
+[Parameter()]
+ [String]$SchoolCode = ""
 )
 
 If ($PSBoundParameters['Debug']) {
     $DebugPreference = 'Continue'
+}
+
+# Verify Required Client Parameters are present
+if ($ClientId -eq "" -Or $ClientSecret -eq "" -Or $SchoolCode -eq "") {
+    Write-Error "Missing Required Authentication Parameters"
+    exit
 }
 
 Write-Debug "DownloadScores called with initParams LastRunDate=$LastRunDate and ExportFolder=$ExportFolder" 
@@ -30,12 +42,6 @@ Write-Debug "DownloadScores called with initParams LastRunDate=$LastRunDate and 
 ###
 # Initialization Parameters
 $apiRoot = 'https://api.ssat.org'
-
-# The next three are Client Specific : TODO : Save it in a Config File
-$clientId = "MY CLIENT ID"
-$clientSecret = "MY CLIENT SECRET"
-$schoolCode = "MY SCHOOLCODE"
-
 
 ##
 # Get an oAuth accessToken for our session 
@@ -45,9 +51,9 @@ $schoolCode = "MY SCHOOLCODE"
 $urlToken = "$apiRoot/oauth/token"
 $authRequestBody = @{
     grant_type = "client_credentials"
-    client_id = $clientId
-    client_secret= $clientSecret
-    scope= $schoolCode
+    client_id = $ClientId
+    client_secret= $ClientSecret
+    scope= $SchoolCode
 }
 
 
