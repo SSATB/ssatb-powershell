@@ -30,7 +30,9 @@ Param(
 If ($PSBoundParameters['Debug']) {
     $DebugPreference = 'Continue'
 }
-
+if (-not ([Net.ServicePointManager]::SecurityProtocol).ToString().Contains([Net.SecurityProtocolType]::Tls12)) {
+  [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol.toString() + ', ' + [Net.SecurityProtocolType]::Tls12
+}
 # Verify Required Client Parameters are present
 if ($ClientId -eq "" -Or $ClientSecret -eq "" -Or $SchoolCode -eq "") {
     Write-Error "Missing Required Authentication Parameters"
