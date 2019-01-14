@@ -12,6 +12,8 @@ Create a Zip Archive containing:
 **Prerequisites:**
    1. Setup OAuth Credentials for Using SSATB SAO APIs
    2. A Windows 10 PC running atleast Powershell 5.0. The Script Creates Lazrge Zip File Archive so it would need atleast 8 GB of RAM
+   3. PowerShell Executuon Policy. By Default Powershell ExecutionPolicy is set to "Restricted" , which basically disables Exectuion of any Scripts. This needs to be changed to atleast "__RemoteSigned__" . You can do that be Logging in as an Admin and executing `set-executionpolicy remotesigned`
+   4. Folder Permissions : This Scripts Creates TempDirectory in the Folder it is Executing or in the *ExportZipArchive* folder f that is specified. It needs permisions to create and delete files in that folder
 --------
 **How to Use:**
    1. Startup Powershell and Navigate to the directory
@@ -23,7 +25,7 @@ Create a Zip Archive containing:
                 - **ClientSecret** : OAuth 2 Client Secret Provided by EMA. This is Required.  
                 - **SchoolCode** : Your SSATB SchoolCode. This is Required.  
                 - *AcademicYear* : If supplied filters Applications for a particular academic year only.By Default retirens all applications.  
-                - *LastRunDate* : If supplied gets filters Applications that have changed since this Date. The default value is start of   
+                - *LastRunDate* : '1/1/1970 12:30PM' If supplied gets filters Applications that have changed since this Date. The default value is start of   
                 Academic year (8/1). Please note the application maintains a file by the name __schoolcode_meta.data__ 
                 where this value is persisted, so that the script can pick up from where it left of when the next time its run. 
                 __PLEASE DO NOT DELETE THIS FILE.__    
