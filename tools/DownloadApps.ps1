@@ -6,7 +6,7 @@
 #
 # options:
 #
-# -LastRunDate       '1/1/1970 12:30PM' Defaults to the Academic Year Start (August-01)
+# -LastRunDate       '1/1/1970 12:00 AM' Defaults to the Academic Year Start (August-01)
 # -ExportZipArchive   '' - A Zip File or a Directory where to Put the Zip file in 
 # -AcademicYear       0  - Filter Apps for a Given year if Necessary
 # -SchoolCode             - SSATB SchoolCode
