@@ -25,7 +25,7 @@ Create a Zip Archive containing:
                 - **ClientSecret** : OAuth 2 Client secret provided by EMA. This is required.  
                 - **SchoolCode** : Your SSATB SchoolCode. This is Required.  
                 - *AcademicYear* : If supplied filters applications for a particular academic year only. By default retrieves all applications.  
-                - *LastRunDate* : '1/1/1970 12:30PM' If supplied gets filtered Applications that have changed since this date. The default value is start of   
+                - *LastRunDate* : '1/1/1970 12:00 AM' If supplied gets filtered Applications that have changed since this date. The default value is start of   
                 Academic year (8/1). Please note the application maintains a file by the name __schoolcode_meta.data__ 
                 where this value is persisted, so that the script can pick up from where it left of when the next time its run. 
                 __PLEASE DO NOT DELETE THIS FILE.__    
