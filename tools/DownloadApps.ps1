@@ -41,7 +41,7 @@ if ($ClientId -eq "" -Or $ClientSecret -eq "" -Or $SchoolCode -eq "") {
 Write-Debug "DownloadApps called with initParams LastRunDate=$LastRunDate and ExportZipArchive=$ExportZipArchive" 
 
 if ($ExportZipArchive -eq "") {
-    $ExportZipArchive = Get-Location
+    $ExportZipArchive = (Get-Location).ToString()
 }
 $TimeNowEST = [System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), 'Eastern Standard Time')
 $ExportFolder = $ExportZipArchive
@@ -172,15 +172,17 @@ foreach ($student in $allFoliosResponse.MemberSchoolStudents) {
         $componentId = $component.ComponentId
         $componentName = $component.ComponentName
         if ($component.CompletionDate) {
-            $pdfUrl = "$apiRoot/sao/StudentApplication/ComponentWithAttachments/PDF/$schoolCode/$folioId/$componentId"
-            $pdfUrl += "?ApplicationSessionYear=$appYear" 
-            $componentFileName = $componentName -replace $pattern, '_' 
-            $fileId = "${folioId}_${appYear}_${componentFileName}.pdf"
-            $fileName = "${tempFolder}\\${fileId}";
-            Invoke-RestMethod -Uri $pdfUrl -Headers $accessTokenHeader -OutFile $fileName
-            Write-Output "Saved $fileName"
-            Add-Content $indexFile """${fileId}""`t""$folioId$appYear""`t""$componentName""" 
-
+            $completionDate = [datetime]::Parse($component.CompletionDate)
+            if ($completionDate -ge $LastRunDate) {
+                $pdfUrl = "$apiRoot/sao/StudentApplication/ComponentWithAttachments/PDF/$schoolCode/$folioId/$componentId"
+                $pdfUrl += "?ApplicationSessionYear=$appYear" 
+                $componentFileName = $componentName -replace $pattern, '_' 
+                $fileId = "${folioId}_${appYear}_${componentFileName}.pdf"
+                $fileName = "${tempFolder}\\${fileId}";
+                Invoke-RestMethod -Uri $pdfUrl -Headers $accessTokenHeader -OutFile $fileName
+                Write-Output "Saved $fileName"
+                Add-Content $indexFile """${fileId}""`t""$folioId$appYear""`t""$componentName""" 
+            }
         }
     }
 }
