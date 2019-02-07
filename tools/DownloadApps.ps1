@@ -168,11 +168,16 @@ foreach ($student in $allFoliosResponse.MemberSchoolStudents) {
     $folioResponse = Invoke-RestMethod -Method Get -Uri $appUrl -Headers $accessTokenHeader
     $components = $folioResponse.Application.Components
     $pattern = '[^a-zA-Z0-9]'
+    $bioComponent = $components | Where-Object {$_.ComponentType -eq "StudentBio"}
+    $appSubmittedDate = [datetime]::Parse($bioComponent.CompletionDate)
     foreach ($component in $components) { 
         $componentId = $component.ComponentId
         $componentName = $component.ComponentName
         if ($component.CompletionDate) {
             $completionDate = [datetime]::Parse($component.CompletionDate)
+            if ($completionDate -lt $appSubmittedDate) {
+                $completionDate = $appSubmittedDate
+            }
             if ($completionDate -ge $LastRunDate) {
                 $pdfUrl = "$apiRoot/sao/StudentApplication/ComponentWithAttachments/PDF/$schoolCode/$folioId/$componentId"
                 $pdfUrl += "?ApplicationSessionYear=$appYear" 
