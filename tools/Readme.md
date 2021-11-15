@@ -59,5 +59,6 @@ Create a Zip Archive containing:
                 where this value is persisted, so that the script can pick up from where it left of when the next time its run. 
                 __PLEASE DO NOT DELETE THIS FILE.__    
                 - *ExportFolder* : A fully qualified path to a directory or a File where you want the Zip Archive.
+                
        The App Prepares a Zip Archive be the Name scores_{schoolcode}_{Date of Run}.zip
                
