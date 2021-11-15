@@ -25,7 +25,7 @@ Param(
 
 ###
 # Initialization Parameters
-$apiRoot = 'https://api-dev.ssat.org'
+$apiRoot = 'https://api.ssat.org'
 
 $ErrorActionPreference ='Stop' # Stop on Errors
 
