@@ -12,7 +12,7 @@ Create a Zip Archive containing:
 **Prerequisites:**
    1. Setup OAuth Credentials for Using SSATB SAO APIs
    2. A Windows 10 PC running atleast Powershell 5.0. The Script creates large zip file archive so it would need atleast 8 GB of RAM
-   3. PowerShell Executuon Policy. By Default Powershell Execution Policy is set to "Restricted", which basically disables exectuion of any scripts. This needs to be changed to atleast "__RemoteSigned__" . You can do that be logging in as an Admin and executing `set-executionpolicy remotesigned`
+   3. PowerShell Execution Policy. By Default Powershell Execution Policy is set to "Restricted", which basically disables execution of any scripts. This needs to be changed to atleast "__RemoteSigned__" . You can do that be logging in as an Admin and executing `set-executionpolicy remotesigned`
    4. Folder Permissions : This scripts creates TempDirectory in the folder it is executing or in the *ExportZipArchive* folder that is specified. It needs permisions to create and delete files in that folder.
 --------
 **How to Use:**
